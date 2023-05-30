@@ -1,0 +1,262 @@
+Algoritmo "Gestão Estoque"
+Var
+   produtoNome : VETOR [1..100] de caractere
+   produtoSaldo : VETOR [1..100] de inteiro
+   produtoCodigo : VETOR [1..100] de inteiro
+   produtoBusca , resposta, login , senha : caractere
+   opcao , x , adSaldo : inteiro
+
+   //========================================================================//
+procedimento Login
+Inicio
+   escreval()
+   escreval()
+
+   escreva("Digite seu login: ")
+   leia(login)
+   escreva("Digite sua senha: ")
+   leia(senha)
+   escreval()
+   LIMPATELA
+
+   escreva("Verificando Login e Senha")
+   timer 550
+
+   escreva(" . ")
+   escreva(" . ")
+   escreva(" . ")
+   escreva(" . ")
+   escreval(" . ")
+
+   timer 0
+
+   SE (login = "Vitor") ENTAO
+      SE (senha = "123") ENTAO
+         escreval()
+         escreva("BEM-VINDO VITOR!")
+         escreval()
+         escreval()
+         Menu
+      SENAO
+         escreval()
+         escreva("LOGIN OU SENHA INCORRETA!")
+         escreval()
+         escreval()
+         Login
+      FIMSE
+   SENAO
+      escreval()
+      escreva("LOGIN OU SENHA INCORRETA!")
+      escreval()
+      escreval()
+      Login
+   FIMSE
+
+
+fimProcedimento
+//===========================================================================//
+
+procedimento Menu
+Inicio
+   escreval("LOGI STOCK")
+   escreval("MENU")
+   escreval()
+   escreval()
+   escreval()
+   escreval()
+   escreval("Digite 1 para cadastrar produto")
+   escreval("Digite 2 para registrar entrada de produto")
+   escreval("Digite 3 para registrar saída de produto")
+   escreval("Digite 4 para verificar saldo de produtos")
+   escreval()
+   leia(opcao)
+   ESCOLHA opcao
+   CASO 1
+      cadastrar_produto
+
+   CASO 2
+      entrada_produto
+   CASO 3
+      saida_produto
+   CASO 4
+      saldo_produto
+   OUTROCASO
+      escreva("COMANDO NÃO ENCONTRADO")
+   FIMESCOLHA
+fimProcedimento
+//===========================================================================//
+procedimento cadastrar_produto
+Inicio
+   LIMPATELA
+   escreval("LOGISTOCK")
+   escreval("CADASTRAR PRODUTO")
+   escreval()
+   escreval()
+   escreval()
+   escreval()
+   x <- x + 1
+   escreva("Nome do produto: ")
+   leia(produtoNome[x])
+   escreva("Quantidade: ")
+   leia(produtoSaldo[x])
+   escreva("Código do produto: #")
+   aleatorio 0, 100
+   leia(produtoCodigo[x])
+   aleatorio off
+   escreval()
+   escreval()
+   escreval()
+   escreva("CADASTRAR OUTRO PRODUTO(S/N): ")
+   leia(resposta)
+   SE resposta = "N" ENTAO
+      LIMPATELA
+      Menu
+   SENAO
+      SE resposta = "S" ENTAO
+         LIMPATELA
+         cadastrar_produto
+
+      FIMSE
+   FIMSE
+fimProcedimento
+//===========================================================================//
+procedimento entrada_produto
+Inicio
+   LIMPATELA
+   escreval("LOGISTOCK")
+   escreval("ENTRADA DE PRODUTOS")
+   escreval()
+   escreval()
+   escreval()
+   escreval()
+   escreva("Nome do produto: ")
+   leia(produtoBusca)
+   REPITA
+      PARA x de 1 ate 100 FACA
+         SE produtoBusca = produtoNome[x] ENTAO
+            escreva("Número de entrada dos produtos: ")
+            leia(adSaldo)
+            produtoSaldo[x] <- produtoSaldo[x] + adSaldo
+            escreval()
+            escreval()
+            escreva("REGISTRAR OUTRA ENTRADA(S/N): ")
+            leia(resposta)
+            SE resposta = "N" ENTAO
+               LIMPATELA
+               Menu
+               interrompa
+            SENAO
+               SE resposta = "S" ENTAO
+                  LIMPATELA
+                  entrada_produto
+                  interrompa
+               FIMSE
+            FIMSE
+         FIMSE
+      FIMPARA
+      escreval()
+      escreval("PRODUTO NÃO ENCONTRADO")
+      escreva("REGISTRAR OUTRA ENTRADA(S/N): ")
+
+      leia(resposta)
+      SE resposta = "N" ENTAO
+         LIMPATELA
+         Menu
+         interrompa
+      SENAO
+         SE resposta = "S" ENTAO
+            LIMPATELA
+            entrada_produto
+            interrompa
+         FIMSE
+      FIMSE
+   FIMREPITA
+fimProcedimento
+//===========================================================================//
+procedimento saida_produto
+Inicio
+   LIMPATELA
+   escreval("LOGISTOCK")
+   escreval("SAÍDA DE PRODUTOS")
+   escreval()
+   escreval()
+   escreval()
+   escreval()
+   escreva("Nome do produto: ")
+   leia(produtoBusca)
+   REPITA
+      PARA x de 1 ate 100 FACA
+         SE produtoBusca = produtoNome[x] ENTAO
+            escreva("Número de saída dos produtos: ")
+            leia(adSaldo)
+            produtoSaldo[x] <- produtoSaldo[x] - adSaldo
+            escreval()
+            escreval()
+            escreva("REGISTRAR OUTRA SAÍDA(S/N): ")
+            leia(resposta)
+            SE resposta = "N" ENTAO
+               LIMPATELA
+               Menu
+               interrompa
+            SENAO
+               SE resposta = "S" ENTAO
+
+                  LIMPATELA
+                  entrada_produto
+                  interrompa
+               FIMSE
+            FIMSE
+         FIMSE
+      FIMPARA
+      escreval()
+      escreva("REGISTRAR OUTRA SAÍDA(S/N): ")
+      leia(resposta)
+      SE resposta = "N" ENTAO
+         LIMPATELA
+         Menu
+         interrompa
+      SENAO
+         SE resposta = "S" ENTAO
+            LIMPATELA
+            entrada_produto
+            interrompa
+         FIMSE
+      FIMSE
+   FIMREPITA
+fimProcedimento
+//===========================================================================//
+procedimento saldo_produto
+Inicio
+   LIMPATELA
+   escreval("LOGISTOCK")
+   escreval("SALDO DE PRODUTOS")
+   escreval()
+   escreval()
+   escreval("NOME / QUANTIDADE / CÓDIGO")
+   escreval()
+   escreval()
+
+   PARA x de 1 ate 100 FACA
+      escreval(produtoNome[x]," /",produtoSaldo[x]," / #",produtoCodigo[x])
+   FIMPARA
+
+   escreval()
+   escreval()
+   escreva("DIGITE M PARA VOLTAR AO MENU: ")
+   leia(resposta)
+   SE resposta = "M" ENTAO
+      LIMPATELA
+      Menu
+      interrompa
+   SENAO
+      SE resposta <> "M" ENTAO
+         LIMPATELA
+         saldo_produto
+         interrompa
+      FIMSE
+   FIMSE
+fimProcedimento
+//===========================================================================//
+Inicio
+   Login
+Fimalgoritmo
